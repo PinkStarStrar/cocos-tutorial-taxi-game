@@ -38,6 +38,7 @@ export class CarManager extends Component {
             return;
         }
 
+        // 回收ai车辆
         this._recycleAllAICar();
         this._currPath = points;
         this._createMainCar(points[0]);
@@ -45,6 +46,7 @@ export class CarManager extends Component {
 
     public controlMoving(isRunning = true){
         if (isRunning) {
+            // 派发事件，显示引导
             CustomEventListener.dispatchEvent(Constants.EventName.SHOW_GUIDE, false);
             this.mainCar.startRunning();
         } else {

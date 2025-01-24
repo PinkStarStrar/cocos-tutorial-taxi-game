@@ -23,6 +23,7 @@ export class UpdateLabelValue extends Label {
         }
 
         this.string = `${this._startVal}`;
+        // 更新数值标记
         this._isPlaying = true;
     }
 

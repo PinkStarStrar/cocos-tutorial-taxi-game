@@ -138,7 +138,9 @@ export class Car extends Component {
         this._pointA.set(entry.worldPosition);
         this._pointB.set(this._currRoadPoint.nextStation.worldPosition);
 
+        // 获取向量
         const z = this._pointB.z - this._pointA.z;
+        
         if (z !== 0) {
             if (z < 0) {
                 this.node.eulerAngles = new Vec3();
@@ -154,6 +156,7 @@ export class Car extends Component {
             }
         }
 
+        // 重置状态
         this._originRotation = this._targetRotation = this._currRotation = this.node.eulerAngles.y;
         this._runState = RunState.NORMAL;
         this._currSpeed = 0;
@@ -172,13 +175,17 @@ export class Car extends Component {
             // collider.setMask(-1);
         }
 
+        // 重置刚体
         this._resetPhysical();
     }
 
     public setCamera(camera: Node, pos: Vec3, rotation: number){
         if(this._isMain){
             this._camera = camera;
+            
+            // 绑定相机到车上
             this._camera.parent = this.node;
+
             this._camera.setPosition(pos);
             this._camera.eulerAngles = new Vec3(rotation, 0, 0);
         }
@@ -202,6 +209,7 @@ export class Car extends Component {
         }
     }
 
+    // 如果想要停止更加丝滑，应该是在这加
     public stopRunning() {
         if (this._runState !== RunState.NORMAL) {
             return;

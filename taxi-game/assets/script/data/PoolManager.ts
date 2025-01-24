@@ -1,9 +1,10 @@
 import { _decorator, Component, Node, Prefab, instantiate } from "cc";
 const { ccclass, property } = _decorator;
 
+// 对象池管理
 @ccclass("PoolManager")
 export class PoolManager {
-    public static handle = new Map<string, Node[]>();
+    public static handle = new Map<string, Node[]>() ;
 
     public static getNode(prefab: Prefab, parent: Node) {
         const name = prefab.data.name;
@@ -21,13 +22,18 @@ export class PoolManager {
 
     public static setNode(target: Node) {
         const name = target.name;
+        
+        //先与父节点解绑 
         target.parent = null;
+        
         if (this.handle.has(name)) {
             this.handle.get(name).push(target);
         } else {
             if (name.length > 0) {
+                // 不仅设置了，也保证只有一个
                 this.handle.set(name, [target]);
             } else {
+                // 拿不到name说明不需要这个node，直接销毁
                 target.destroy();
             }
         }

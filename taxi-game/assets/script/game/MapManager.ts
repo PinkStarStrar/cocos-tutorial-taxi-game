@@ -191,6 +191,7 @@ export class MapManager extends Component {
         }
     }
 
+    // 回收不用的节点
     private _recycleModel(type: string) {
         let nodeParent = this.node.getChildByName(type);
         if (!nodeParent) {

@@ -16,9 +16,10 @@ export class CustomEventListener extends Component {
 
     public static on(eventName: string, cb:Function, target?: any){
         if(!this.handle[eventName]){
+            // 没有的话置为空，初始化
             this.handle[eventName] = [];
         }
-
+        // 添加新的数组元素
         const data: IEventData = { func: cb, target };
         this.handle[eventName].push(data);
     }

@@ -15,7 +15,10 @@ export class UIManager {
         if(this._dictPanel.has(name)){
             const panel = this._dictPanel.get(name)!;
             const parent = find('Canvas');
+
+            // 场景中添加面板
             panel.parent = parent;
+            
             const comp = panel.getComponent(scriptName);
             if (comp && (comp as Component & PageActive)['show']){
                 (comp as Component & PageActive)['show'].apply(comp, args);
@@ -54,9 +57,13 @@ export class UIManager {
         if(this._dictPanel.has(name)){
             const scriptName = name.substr(0, 1).toUpperCase() + name.substr(1);
             const panel = this._dictPanel.get(name)!;
+            
+            // 将面板从场景中移除
             panel.parent = null;
+            
             const comp = panel.getComponent(scriptName);
             if (comp && (comp as Component & PageActive)['hide']) {
+                // apply方法指定上下文
                 (comp as Component & PageActive)['hide'].apply(comp);
             }
 

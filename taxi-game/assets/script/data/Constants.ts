@@ -36,6 +36,7 @@ enum AudioSource {
     WIN = 'win',
 }
 
+// 设置的位掩码，操作多个布尔值较为方便
 enum CarGroup {
     NORMAL = 1 << 0,
     MAIN_CAR = 1 << 1,
